@@ -119,6 +119,7 @@ local DumpBinary = {
     end
     ]]
     Opcode = function(op)
+        --print(op.OpcodeType)
         local c0, c1, c2, c3
         if op.OpcodeType == "AsBx" then 
             local bx = op.sBx + 131071 
@@ -128,6 +129,7 @@ local DumpBinary = {
             c1 = srb(op.A, 2) + slb(keep(c, 2), 6)
             c2 = srb(c, 2) + slb(keep (b, 1), 7)
             c3 = srb(b, 1)
+            --print(c0 .. " " .. c1 .. " " .. c2 .. " " .. c3)
             return string.char(c0, c1, c2, c3)
         end
         if op.OpcodeType == "ABx" then 
@@ -137,12 +139,14 @@ local DumpBinary = {
             c1 = srb(op.A, 2) + slb(keep(c, 2), 6)
             c2 = srb(c, 2) + slb(keep (b, 1), 7)
             c3 = srb(b, 1)
+            --print(c0 .. " " .. c1 .. " " .. c2 .. " " .. c3)
             return string.char(c0, c1, c2, c3)
         end
         c0 = op.OpcodeNumber + slb(keep(op.A, 2), 6)
         c1 = srb(op.A, 2) + slb(keep(op.C, 2), 6)
         c2 = srb(op.C, 2) + slb(keep (op.B, 1), 7)
         c3 = srb(op.B, 1)
+        --print(c0 .. " " .. c1 .. " " .. c2 .. " " .. c3)
         return string.char(c0, c1, c2, c3)
     end
 }
