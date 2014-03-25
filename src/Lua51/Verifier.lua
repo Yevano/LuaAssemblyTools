@@ -176,7 +176,7 @@ local OpcodeChecks = {
             --print(i.sBx, tmp)
             --assert(tmp >= 0, "JMP.sBx out of bounds")
             --assert(math.abs(i.sBx) >= f.Instructions.Count - i2, "JMP.sBx out of bounds")
-            assert(i2 + i.sBx >= 0)
+            assert(i2 + i.sBx >= -1)
             --assert(i.sBx >= i2 - f.Instructions.Count, "JMP.sBx out of bounds")
         else
             assert(i.sBx < (f.Instructions.Count - i2) + 1, "JMP.sBx out of bounds")
