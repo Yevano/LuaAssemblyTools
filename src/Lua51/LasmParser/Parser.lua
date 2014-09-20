@@ -315,8 +315,12 @@ local Parser = {
             if instr.OpcodeType == "ABC" then
                 instr.A = readnumber(isARK)
                 tok:ConsumeSymbol','
-                instr.B = readnumber(isBRK)
-                tok:ConsumeSymbol','
+                if instr.Opcode ~= "TEST" then
+                    instr.B = readnumber(isBRK)
+                    tok:ConsumeSymbol','
+                else
+                    instr.B = 0
+                end
                 if isNumber() then
                     instr.C = readnumber(isCRK)
                 else
