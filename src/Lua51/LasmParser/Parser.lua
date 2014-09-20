@@ -110,7 +110,7 @@ local Parser = {
         end
         
         local function addConst(alwaysDefine)
-            alwaysDefine = alwaysDefine == nil and true or alwaysDefine
+            alwaysDefine = alwaysDefine == nil and false or alwaysDefine
             local value = nil
             
             if tok:Is'String' then value = evalString(tok:Get().Data)
