@@ -8,6 +8,7 @@ local Parser = {
     
     Parse = function(self, source, name)
         local constTable = { } -- will fill up with [const] = [constant table index]
+        local nilDefined = false
         local constNil = nil -- because you can't index a table with nil, sadly...
         local funcJumps = { }
         local fixJumps = { }
@@ -121,10 +122,11 @@ local Parser = {
             else parseError"Unable to process constant"
             end
             
-            if alwaysDefine or constTable[value] == nil then
+            if alwaysDefine or (constTable[value] == nil and value ~= nil) or (value == nil and not nilDefined) then
                 if value == true or value == false then
                     func.Constants:Add(LAT.Lua51.Constant:new("Bool", value))
                 elseif value == nil then
+                    nilDefined = true
                     func.Constants:Add(LAT.Lua51.Constant:new("Nil", nil))
                 elseif type(value) == "number" then
                     func.Constants:Add(LAT.Lua51.Constant:new("Number", value))
